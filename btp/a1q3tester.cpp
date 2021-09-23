@@ -4,7 +4,8 @@
 /*                                                                             */
 /*   To compile: g++ majorityelement.cpp a1q3tester.cpp timer.cpp -std=c++0x   */
 /*                                                                             */
-/*   version: 1.0                                                              */
+/*   NOTE: if you are working in windows, change the #define                   */
+/*   PLATFORM line in timer.h, see comments in that file                       */
 /*                                                                             */
 /*                                                                             */
 /*******************************************************************************/
@@ -64,10 +65,12 @@ int main(void){
         }
     }
     if(numPassed == numTests){
-        std::cout << "Congratulations! You have passed testing for A1 part 1" << std::endl;
+        std::cout << "Congratulations! You have passed testing for A1 part 3" << std::endl;
+        return 0;
     }
     else{
         std::cout << "Looks like you still have some work left to do" << std::endl;
+        return 1;
     }
 }
 bool test1(std::string& error){
