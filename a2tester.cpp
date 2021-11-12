@@ -11,7 +11,7 @@
 /*   Reminder that if you are working in VS, you need to change the       */
 /*   #define PLATFORM line in timer.h                                     */
 /*                                                                        */
-/*                                                                        */
+/*   version 1.1: fixed test 7 and 17                                     */
 /**************************************************************************/
 
 #include "table.h"
@@ -800,7 +800,7 @@ bool test7(std::string keys[], int data[], int max, std::string& error){
 		isGood=false;
 	}
 
-
+	i=0;
     //alter original record's data
 	while(count<650){
 		table1.update(keys[i],data[i]+1);
@@ -847,7 +847,7 @@ bool test7(std::string keys[], int data[], int max, std::string& error){
 	count=0;
 	while(isGood && count<10000){
 		int value;
-		isGood=table2.find(keys[i],value);
+		isGood=table2copy.find(keys[i],value);
 		if(!isGood){
 			error="Error 7i: find returned false for a record that should exist in the table created with copy constructor";
 		}
@@ -870,7 +870,7 @@ bool test7(std::string keys[], int data[], int max, std::string& error){
 	count=0;
 	while(isGood && count<40000){
 		int value;
-		isGood=table3.find(keys[i],value);
+		isGood=table3copy.find(keys[i],value);
 		if(!isGood){
 			error="Error 7k: find returned false for a record that should exist in the table created with copy constructor";
 		}
@@ -1056,7 +1056,7 @@ bool test9(std::string keys[], int data[], int max, std::string& error){
 
 	ChainingTable<int> moved1=std::move(table);
 	if(isGood && moved1.capacity() != correctCap){
-		error="Error 9a: copy's capacity was not correct.\n Correct capacity: ";
+		error="Error 9a: moved object's capacity was not correct.\n Correct capacity: ";
 		error+=std::to_string(correctCap);
 		error+="\nYour function returns: ";
 		error+=std::to_string(moved1.capacity());
@@ -1093,7 +1093,7 @@ bool test9(std::string keys[], int data[], int max, std::string& error){
 	}
 	moved1.update(keys[i],data[i]);
 	if(isGood && moved1.capacity() != correctCap){
-		error="Error 9e: copy's capacity was not correct.\n Correct capacity: ";
+		error="Error 9e:  moved object's capacity was not correct.\n Correct capacity: ";
 		error+=std::to_string(correctCap);
 		error+="\nYour function returns: ";
 		error+=std::to_string(moved1.capacity());
@@ -2005,7 +2005,7 @@ bool test17(std::string keys[], int data[], int max, std::string& error){
 		isGood=false;
 	}
 
-
+	i=0;
     //alter original record's data
 	while(count<700){
 		table1.update(keys[i],data[i]+1);
@@ -2052,7 +2052,7 @@ bool test17(std::string keys[], int data[], int max, std::string& error){
 	count=0;
 	while(isGood && count<7000){
 		int value;
-		isGood=table2.find(keys[i],value);
+		isGood=table2copy.find(keys[i],value);
 		if(!isGood){
 			error="Error 17i: find returned false for a record that should exist in the table created with copy constructor";
 		}
@@ -2075,7 +2075,7 @@ bool test17(std::string keys[], int data[], int max, std::string& error){
 	count=0;
 	while(isGood && count<14000){
 		int value;
-		isGood=table3.find(keys[i],value);
+		isGood=table3copy.find(keys[i],value);
 		if(!isGood){
 			error="Error 17k: find returned false for a record that should exist in the table created with copy constructor";
 		}
